@@ -52,7 +52,7 @@ namespace ark.bible.analysis
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect("mail.immanuel.co", 2525, SecureSocketOptions.Auto);
-            smtp.Authenticate("sticky.notes@immanuel.co", "Loo0@$E7");
+            smtp.Authenticate("sticky.notes@immanuel.co", "");
             smtp.Send(email);
             smtp.Disconnect(true);
         }
