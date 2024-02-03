@@ -1,0 +1,1092 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', sans-serif;
+            color: #535353;
+        }
+
+        form {
+            width: 100vmin;
+            height: 100vmin;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        input {
+            position: absolute;
+            left: -9999px;
+        }
+
+        @keyframes delaypause0 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause1 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause2 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause3 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause4 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause5 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypause6 {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        @keyframes delaypaused {
+            0% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+
+            100% {
+                --delaypause: running;
+                --delayvisible: hidden;
+            }
+        }
+
+        #world {
+            width: 100%;
+            height: 100%;
+        }
+
+        [id$="_0"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause0 3s;
+        }
+
+        [id$="_1"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause1 3s;
+        }
+
+        [id$="_2"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause2 3s;
+        }
+
+        [id$="_3"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause3 3s;
+        }
+
+        [id$="_4"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause4 3s;
+        }
+
+        [id$="_5"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause5 3s;
+        }
+
+        [id$="_6"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypause6 3s;
+        }
+
+        [id^="j_d"]:checked ~ #world {
+            --delaypause: paused;
+            --delayvisible: visible;
+            animation: delaypaused 0.95s;
+        }
+
+        @keyframes dayNight {
+            49% {
+                filter: none;
+            }
+
+            50% {
+                filter: invert();
+            }
+
+            99% {
+                filter: invert();
+            }
+        }
+
+        #dayNight {
+            width: 100%;
+            height: 100%;
+            background: white;
+            animation: none 100s linear infinite;
+            animation-play-state: var(--delaypause);
+        }
+
+        [name="jump"]:checked ~ #world #dayNight {
+            animation-name: dayNight;
+        }
+
+        @keyframes bgScroll {
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        #bg {
+            position: absolute;
+            top: 68vmin;
+            width: 300vmin;
+            height: 6vmin;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAYCAYAAACLOiSEAAAA00lEQVR4nO3aOxLDIAwFQO7I/c+S1CmDZSTQ7ox6I8Qb/8aAS805P/9W9jUDhBCAQDsroSYIgSsIQKCNyMdZQQgcRQAC7bwZVj6SAKUJQB5b+VVAqUrV6ZzsWGu1Nb/az+wLUOppdQqDHWuttuZb+gks2Hl4BQVQigAEGHsfS7PXCvBDAB5Mo+lM4DRn4+lMANJKlcF20Mhk/pqqsuEGkEzmDwCAQjrckla/BfdyPIc+x4ju39Zz0GHjqw+6AMyhzzGODsAVDiyRzA1HEYBEMjdk+QKCOULrseN++gAAAABJRU5ErkJggg==);
+            background-size: 50vmin 4vmin;
+            background-repeat: repeat-x;
+            animation: none 5s linear infinite;
+            animation-play-state: var(--delaypause);
+        }
+
+        #clouds {
+            position: absolute;
+            top: 20vmin;
+            width: 300vmin;
+            height: 32vmin;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAABkCAYAAACoy2Z3AAACl0lEQVR4nO3dW46jMBBA0d7/ErOZme8gBYwxdrnqHInvNEaqG16dvz+Y5PP5/DvbVv99AAQlIAB8uQrDVSgEBaAoAQHglrcGvoAAJPd2QIQEIIlZl5oEBCCZ2fcqBAQgidkDXUAAklgVEE9pAWxOQADoEuUS1tP3TgB4SZSBLCAAm1k9kEd9joAATBLlm7uAAGwmSkBGWX0mBbCdu/cIsg7WKvsJMIyAnKuynwDNqoWgl/UBOBCQNlXPvAB+MgjbCAjAgUHYx7oB5RmEfawbUFbrpRiD8pz1AcoRkDGsD8CFp++JZN9WHx+AsFYP6Ojb6uMDAAAAAAAAADCFhygA6CIgAHx5+ri2oAAUJSAA3PLWwBcQgOTeDoiQACQx61KTgAAkM/tehYAAJDF7oAsIQBKrAuIpLYDNCQgAXaJcwvI7MwBBRRnIAgKwmdUDedTnCAjAJFG+uQsIwGaiBGSU1WdSANu5e48g62Ctsp8AwwjIuSr7CdCsWgh6WR+AAwFpU/XMC+Ang7CNgAAcGIR9rBtQnkHYx7oBZbVeijEoz1kfoBwBGcP6AFx4+p5I9m318QEIa/WAjr6tPj4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOTnf+cD0EVAAPjy9Fe6BAWgKAEB4Ja3Br6AACT3dkCEBCCJWZeaBAQgmdn3KgQEIInZA11AAJJYFRBPaQFsTkAA6BLlEtbT904AeEmUgSwgAJtZPZBHfY6AAEwS5Zu7gABsJkpARll9JgWwnbv3CLIO1ir7CTCMgJyrsp8AzaqFoJf1ATgQkDZVz7wAfjII2wgIwIFB2Me6AeUZhH2sG1BW66UYg/Kc9QHKEZAxrA/AhafviWTfVh8fgLBWD+jo2+rjAzDLfwV/JcRHi71RAAAAAElFTkSuQmCC);
+            background-size: 75vmin 20vmin;
+            background-repeat: repeat;
+            animation: none 30s linear infinite;
+            animation-play-state: var(--delaypause);
+        }
+
+        [name="jump"]:checked ~ #world #bg,
+        [name="jump"]:checked ~ #world #clouds {
+            animation-name: bgScroll;
+        }
+
+        #hi {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+            right: 43vmin;
+            top: 10vmin;
+            text-transform: uppercase;
+            font-size: 4vmin;
+            line-height: 6vmin;
+            color: #757575;
+        }
+
+        @keyframes score {
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        .score {
+            position: absolute;
+            width: 16vmin;
+            height: 6vmin;
+            right: 5vmin;
+            top: 10vmin;
+            background: white;
+            display: flex;
+            overflow: hidden;
+            counter-reset: ones -1 tens -1 hundreds -1 thousands -1;
+        }
+
+        @keyframes hiscore {
+            100% {
+                z-index: 10000
+            }
+        }
+
+        #hiscore1,
+        #hiscore2 {
+            right: 25vmin;
+            color: #757575;
+            z-index: 0;
+            animation: none 10000s steps(10000) infinite paused;
+        }
+
+        .score ul {
+            width: 4vmin;
+            height: 60vmin;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            animation: none 10s steps(10) infinite paused;
+        }
+
+        [name="jump"]:checked ~ #world #score ul,
+        #h1:checked ~ form [name="jump"]:checked ~ #world #hiscore1,
+        #h2:checked ~ form [name="jump"]:checked ~ #world #hiscore2,
+        #h1:checked ~ form [name="jump"]:checked ~ #world #hiscore1 ul,
+        #h2:checked ~ form [name="jump"]:checked ~ #world #hiscore2 ul {
+            animation-play-state: var(--delaypause);
+        }
+
+        .score li {
+            display: block;
+            width: 100%;
+            height: 6vmin;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+            .score li::before {
+                line-height: 6vmin;
+                font-size: 4vmin;
+            }
+
+        .score .thousands li::before {
+            content: counter(thousands);
+            counter-increment: thousands 1;
+        }
+
+        .score .hundreds li::before {
+            content: counter(hundreds);
+            counter-increment: hundreds 1;
+        }
+
+        .score .tens li::before {
+            content: counter(tens);
+            counter-increment: tens 1;
+        }
+
+        .score .ones li::before {
+            content: counter(ones);
+            counter-increment: ones 1;
+        }
+
+        .score .thousands {
+            animation-duration: 10000s;
+        }
+
+        .score .hundreds {
+            animation-duration: 1000s;
+        }
+
+        .score .tens {
+            animation-duration: 100s;
+        }
+
+        #h1:checked ~ form [name="jump"]:checked ~ #world #hiscore1,
+        #h2:checked ~ form [name="jump"]:checked ~ #world #hiscore2,
+        #h1:checked ~ form #world #hiscore2,
+        #h2:checked ~ form #world #hiscore1 {
+            animation-name: hiscore;
+        }
+
+            [name="jump"]:checked ~ #world #score ul,
+            #h1:checked ~ form [name="jump"]:checked ~ #world #hiscore1 ul,
+            #h2:checked ~ form [name="jump"]:checked ~ #world #hiscore2 ul,
+            #h1:checked ~ form #world #hiscore2 ul,
+            #h2:checked ~ form #world #hiscore1 ul {
+                animation-name: score;
+            }
+
+        #dino {
+            position: absolute;
+            left: 12vmin;
+            top: 60vmin;
+            width: 11vmin;
+            height: 12vmin;
+            animation: none 1s ease-out;
+            animation-play-state: var(--delaypause);
+            overflow: hidden;
+        }
+
+            #dino .body {
+                position: absolute;
+                width: 11vmin;
+                height: 12vmin;
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABeCAYAAACnzNMpAAABWElEQVR4nO3YQW7DIBCG0dzR9z9Hlu26LEpd8zNA3ifNlpjnSCP59dqs9/v9tfJU+zyuGhAw4GdVAx4H3LvQdV2lAxjw7wEOBzjcaqDHgQMOdxe4DXAnwOEAhwMczpILBzgc4HCAwwEOBzgc4HCAwwEOBzgc4HCAw6WB2/NHT7VfN8DhAIc7Drj6jfR+f/slBhgw4CcdB9y7QAr4r0siDTR8iQEGDBjwQsBVkKOA//XvAQwYMOBBwKOXxCzIUS8AMGDAgFcCvgteDdZ7XsCAAQPeGXi3ubuUAQNeawAD3nuGAwIGDPikmQ78aeCAAe815aCAi9sdHDBgwNEAT2518PjHm3SAwwEOB3hy1eDHgbYBDgc4HOBwvQs+BQMMOBvgcIAn9xTo7nnHg7YBDgc4HOBwo0EANwEOBzgc4HCzl9zHgQMOBzgc4HDtBe9O+rztAxwOcDjAP/sG0NsR0X5rDMUAAAAASUVORK5CYII=);
+                background-size: 11vmin 12vmin;
+                animation: none 1s steps(1);
+            }
+
+        [name="jump"]:checked ~ #world #dino .body {
+            height: 9.5vmin;
+        }
+
+        #dino .feet {
+            position: absolute;
+            left: 0;
+            bottom: -2.5vmin;
+            width: 22vmin;
+            height: 2.5vmin;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAAAUCAYAAAAtOremAAAAt0lEQVRoge3XQQ6EMAxDUe7Y+5+jS9hHgqokTkn5T+qSarA9C47Dqfd+Pp3W2tSJum90j/e9s3jzUD+/Oh83BqzFgMUYsBYDFmPAWgw4mTeg0X1vz4osFLIHvWuOtxiwFgMWY8BaDFiMAWsxYDECyeX9I9OXQSC5GHAwAsnFgIMRSC4GHMz7UbH69/8NfRkEUgt9GQRSC30ZBFILfRmzHxXbB/Jx9GUQSC30ZRBILfRlEEgt1fu6AMEa3BVUlp+PAAAAAElFTkSuQmCC);
+            background-size: 22vmin 2.5vmin;
+            animation: none 0.5s steps(2) infinite;
+            animation-play-state: var(--delaypause);
+        }
+
+        [name="jump"]:checked ~ #world #dino .feet {
+            animation-name: shuffle;
+        }
+
+        #dino .die {
+            position: absolute;
+            width: 11vmin;
+            height: 12vmin;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABeCAYAAACnzNMpAAABX0lEQVR4nO3YQQ6DIBBAUe/o/c/hsl2XRRHhzwD+n8ymaaQ8mxA9jsW6rusz82T7dJcNKLDAfWUDbgdc29B5nqkjsMD/ExhOYLjZQLcDFxiuFbiWwEUCwz0Fvvu5wAKzCQwnMJyHHJzAcD5owAkMJzCcwHACwwkMJzCcwHACwwkMJzDcdsDlF6LvSG396QF7NwiYNq0vcGcCw20HXNsABVyDpEDvrnt3BBZYYIFnBs6CHAX86N8jsMACCzwIePQhEQU56gYILLDAAs8E3AqeDVb7vQILLLDAKwOvNq2HssACzzUCC7z2DAcUWGCBd5pw4LeBCyzwWpMOKnByq4MLLLDAaAIHNzs4/vKGTmA4geEEDi4bfDvQMoHhBIYTGK62wV4wgQVmExhO4OB6gVqvtz1omcBwAsMJDDcaROAigeEEhhMYLvqQex24wHACwwkMV26wdejrLZ/AcALDCfzbF8touIK+LzOmAAAAAElFTkSuQmCC);
+            background-size: 11vmin 12vmin;
+            visibility: var(--delayvisible, hidden);
+        }
+
+        [name="jump"]:checked ~ #world #dino .die {
+            animation-name: show;
+        }
+
+        .ob {
+            position: absolute;
+            left: 110vmin;
+            top: 62vmin;
+            width: 10vmin;
+            height: 10vmin;
+            animation: none 5s linear;
+            animation-play-state: var(--delaypause);
+            overflow: hidden;
+        }
+
+        @keyframes shuffle {
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes animate {
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        .ob div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30vmin;
+            height: 20vmin;
+            animation: shuffle 0.1s steps(3) infinite;
+            animation-play-state: var(--delaypause);
+        }
+
+            .ob div::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 30vmin;
+                height: 20vmin;
+                background-image: url(data:image/png;base64,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);
+                background-size: cover;
+                animation: animate 1s steps(2) infinite;
+                animation-play-state: var(--delaypause);
+            }
+
+        [for^="j"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            cursor: pointer;
+            visibility: hidden;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        [for="j_0"],
+        [name="jump"]:checked ~ #world [for^="j_"] {
+            visibility: visible;
+        }
+
+        [name="jump"]:checked ~ #world [for="j_0"] {
+            visibility: hidden;
+        }
+
+        [for^="j_"] {
+            animation: none 3s steps(5);
+        }
+
+        #block {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 5vmin;
+            z-index: 2;
+            visibility: hidden;
+            animation: none 1s steps(1);
+        }
+
+        #gameover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            animation: none 0s steps(1) 3s;
+            animation-fill-mode: forwards;
+            visibility: hidden;
+            z-index: 2;
+        }
+
+            #gameover p {
+                margin-top: 30vmin;
+                padding-left: 0.5em;
+                font-size: 4vmin;
+                letter-spacing: 1em;
+                text-transform: uppercase;
+                text-align: center;
+            }
+
+            #gameover div {
+                position: absolute;
+                width: 60vmin;
+                height: 8vmin;
+                left: 50%;
+                top: 40vmin;
+                transform: translateX(-50%);
+                background: white;
+                z-index: 0;
+                animation: none 10000s steps(10000) infinite paused;
+            }
+
+        #h1:checked ~ form [name="jump"]:checked ~ #world #reset1,
+        #h2:checked ~ form [name="jump"]:checked ~ #world #reset2 {
+            animation-play-state: var(--delaypause);
+        }
+
+        #h1:checked ~ form [name="jump"]:checked ~ #world #reset1,
+        #h2:checked ~ form [name="jump"]:checked ~ #world #reset2,
+        #h1:checked ~ form #world #reset2,
+        #h2:checked ~ form #world #reset1 {
+            animation-name: hiscore;
+        }
+
+        #gameover label {
+            position: absolute;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        [for^="h"] {
+            width: calc(100% - 1em);
+            padding-left: 0.5em;
+            background: #535353;
+            color: white;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            font-size: 3vmin;
+            line-height: 8vmin;
+            text-align: center;
+        }
+
+        #gameover [for="reset"] {
+            width: 9vmin;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABACAYAAAC5vjEqAAAA4ElEQVR4nO3bMQ7DIBAEQP/R/3+Hy6RKkUjIxCawhDlpS+Bu6JDYtkIdx/FYKSWHYo1uOBbotWDf96VSDQUIzDUoQAUgMCdQgAABAgQoL8OB0i8G0CxAqVCAZgNKgwI0CqjVA9ZoYEC9gVrB1A58FxhQClBvmG/PBTQr0K/W9d4P0CxAV88HtDrQXRhAqwK1DiBAgAABAjS+sZQ+AAECNDdQSgClA6VCtZoHUC+gFKjWcwDqDfQvAQQIECBAwQEECBAgQMEBVAvk7+oJDKBKoNWhTmEAVQJ9Qq2SahhA7/UEHf0G9uSEi4AAAAAASUVORK5CYII=);
+            background-size: cover;
+        }
+
+        #h1:checked ~ form [for="h1"],
+        #h2:checked ~ form [for="h2"] {
+            visibility: hidden;
+        }
+
+        @keyframes ob1 {
+            100% {
+                transform: translateX(-150vmin);
+            }
+        }
+
+        @keyframes ob2 {
+            100% {
+                transform: translateX(-150vmin);
+            }
+        }
+
+        @keyframes jump1 {
+            50% {
+                transform: translateY(-25vmin);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes jump2 {
+            50% {
+                transform: translateY(-25vmin);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes jumpd {
+            50% {
+                transform: translateY(-25vmin);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes jump_1 {
+            50% {
+                transform: translateY(-25vmin);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes jump_2 {
+            50% {
+                transform: translateY(-25vmin);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes legs1 {
+            0% {
+                height: 12vmin;
+            }
+
+            100% {
+                height: 12vmin;
+            }
+        }
+
+        @keyframes legs2 {
+            0% {
+                height: 12vmin;
+            }
+
+            100% {
+                height: 12vmin;
+            }
+        }
+
+        @keyframes legsd {
+            0% {
+                height: 12vmin;
+            }
+
+            100% {
+                height: 12vmin;
+            }
+        }
+
+        @keyframes legs_1 {
+            0% {
+                height: 12vmin;
+            }
+
+            100% {
+                height: 12vmin;
+            }
+        }
+
+        @keyframes legs_2 {
+            0% {
+                height: 12vmin;
+            }
+
+            100% {
+                height: 12vmin;
+            }
+        }
+
+        @keyframes j {
+            79.999% {
+                z-index: 1;
+            }
+
+            80% {
+                z-index: 2;
+            }
+
+            100% {
+                z-index: 2;
+            }
+        }
+
+        @keyframes jd {
+            64.999% {
+                z-index: 1;
+            }
+
+            65% {
+                z-index: 2;
+            }
+
+            100% {
+                z-index: 2;
+            }
+        }
+
+        @keyframes b_1 {
+            0% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes b_2 {
+            0% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes b1 {
+            0% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes b2 {
+            0% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes bd {
+            0% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes go1 {
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes go2 {
+            100% {
+                visibility: visible;
+            }
+        }
+
+        @keyframes god {
+            100% {
+                visibility: visible;
+            }
+        }
+
+        [id$="_1"]:checked ~ #world #ob1,
+        [id$="_2"]:checked ~ #world #ob1,
+        [id$="_2"]:checked ~ #world #ob2,
+        [id$="_3"]:checked ~ #world #ob2,
+        [id$="_3"]:checked ~ #world #ob3,
+        [id$="_4"]:checked ~ #world #ob3,
+        [id="j_d1"]:checked ~ #world #ob1,
+        [id="j_d2"]:checked ~ #world #ob1,
+        [id="j_d2"]:checked ~ #world #ob2,
+        [id="j_d3"]:checked ~ #world #ob2,
+        [id="j_d3"]:checked ~ #world #ob3,
+        [id="j_d4"]:checked ~ #world #ob3 {
+            animation-name: ob1;
+        }
+
+        [id$="_0"]:checked ~ #world #ob3,
+        [id$="_1"]:checked ~ #world #ob3,
+        [id$="_4"]:checked ~ #world #ob1,
+        [id$="_5"]:checked ~ #world #ob1,
+        [id$="_5"]:checked ~ #world #ob2,
+        [id$="_6"]:checked ~ #world #ob2,
+        [id$="_6"]:checked ~ #world #ob3,
+        [id="j_d0"]:checked ~ #world #ob3,
+        [id="j_d1"]:checked ~ #world #ob3,
+        [id="j_d4"]:checked ~ #world #ob1,
+        [id="j_d5"]:checked ~ #world #ob1,
+        [id="j_d5"]:checked ~ #world #ob2,
+        [id="j_d6"]:checked ~ #world #ob2,
+        [id="j_d6"]:checked ~ #world #ob3 {
+            animation-name: ob2;
+        }
+
+            [id$="_1"]:checked ~ #world #ob1 div,
+            [id$="_2"]:checked ~ #world #ob1 div,
+            [id$="_2"]:checked ~ #world #ob2 div,
+            [id$="_3"]:checked ~ #world #ob2 div,
+            [id$="_3"]:checked ~ #world #ob3 div,
+            [id$="_4"]:checked ~ #world #ob3 div,
+            [id$="_0"]:checked ~ #world #ob3 div,
+            [id$="_1"]:checked ~ #world #ob3 div,
+            [id$="_4"]:checked ~ #world #ob1 div,
+            [id$="_5"]:checked ~ #world #ob1 div,
+            [id$="_5"]:checked ~ #world #ob2 div,
+            [id$="_6"]:checked ~ #world #ob2 div,
+            [id$="_6"]:checked ~ #world #ob3 div,
+            [id="j_d1"]:checked ~ #world #ob1 div,
+            [id="j_d2"]:checked ~ #world #ob1 div,
+            [id="j_d2"]:checked ~ #world #ob2 div,
+            [id="j_d3"]:checked ~ #world #ob2 div,
+            [id="j_d3"]:checked ~ #world #ob3 div,
+            [id="j_d4"]:checked ~ #world #ob3 div,
+            [id="j_d0"]:checked ~ #world #ob3 div,
+            [id="j_d1"]:checked ~ #world #ob3 div,
+            [id="j_d4"]:checked ~ #world #ob1 div,
+            [id="j_d5"]:checked ~ #world #ob1 div,
+            [id="j_d5"]:checked ~ #world #ob2 div,
+            [id="j_d6"]:checked ~ #world #ob2 div,
+            [id="j_d6"]:checked ~ #world #ob3 div {
+                animation-play-state: paused;
+            }
+
+        #j_1:checked ~ #world #dino,
+        #j_3:checked ~ #world #dino,
+        #j_5:checked ~ #world #dino {
+            animation-name: jump1;
+        }
+
+            #j_1:checked ~ #world #dino .body,
+            #j_3:checked ~ #world #dino .body,
+            #j_5:checked ~ #world #dino .body {
+                animation-name: legs1;
+            }
+
+        #j_0:checked ~ #world #dino,
+        #j_2:checked ~ #world #dino,
+        #j_4:checked ~ #world #dino,
+        #j_6:checked ~ #world #dino {
+            animation-name: jump2;
+        }
+
+            #j_0:checked ~ #world #dino .body,
+            #j_2:checked ~ #world #dino .body,
+            #j_4:checked ~ #world #dino .body,
+            #j_6:checked ~ #world #dino .body {
+                animation-name: legs2;
+            }
+
+        [id^="j_d"]:checked ~ #world #dino {
+            animation-name: jumpd;
+        }
+
+            [id^="j_d"]:checked ~ #world #dino .body {
+                animation-name: legsd;
+            }
+
+        [id^="j1_"]:checked ~ #world #dino {
+            animation-name: jump_1;
+        }
+
+            [id^="j1_"]:checked ~ #world #dino .body {
+                animation-name: legs_1;
+            }
+
+        [id^="j2_"]:checked ~ #world #dino {
+            animation-name: jump_2;
+        }
+
+            [id^="j2_"]:checked ~ #world #dino .body {
+                animation-name: legs_2;
+            }
+
+        [id$="_0"]:checked ~ #world [for$="_0"],
+        [id$="_1"]:checked ~ #world [for$="_1"],
+        [id$="_2"]:checked ~ #world [for$="_2"],
+        [id$="_3"]:checked ~ #world [for$="_3"],
+        [id$="_4"]:checked ~ #world [for$="_4"],
+        [id$="_5"]:checked ~ #world [for$="_5"],
+        [id$="_6"]:checked ~ #world [for$="_6"] {
+            visibility: visible;
+        }
+
+        [id^="j1_"]:checked ~ #world [for^="j1_"],
+        [id^="j2_"]:checked ~ #world [for^="j2_"] {
+            visibility: hidden;
+        }
+
+        [id$="_0"]:checked ~ #world [for="j_1"],
+        [id$="_1"]:checked ~ #world [for="j_2"],
+        [id$="_2"]:checked ~ #world [for="j_3"],
+        [id$="_3"]:checked ~ #world [for="j_4"],
+        [id$="_4"]:checked ~ #world [for="j_5"],
+        [id$="_5"]:checked ~ #world [for="j_6"],
+        [id$="_6"]:checked ~ #world [for="j_1"] {
+            animation-name: j;
+        }
+
+        [id$="_0"]:checked ~ #world [for="j_d0"],
+        [id$="_1"]:checked ~ #world [for="j_d1"],
+        [id$="_2"]:checked ~ #world [for="j_d2"],
+        [id$="_3"]:checked ~ #world [for="j_d3"],
+        [id$="_4"]:checked ~ #world [for="j_d4"],
+        [id$="_5"]:checked ~ #world [for="j_d5"],
+        [id$="_6"]:checked ~ #world [for="j_d6"] {
+            animation-name: jd;
+        }
+
+        #j_1:checked ~ #world #block,
+        #j_3:checked ~ #world #block,
+        #j_5:checked ~ #world #block {
+            animation-name: b_1;
+        }
+
+        #j_0:checked ~ #world #block,
+        #j_2:checked ~ #world #block,
+        #j_4:checked ~ #world #block,
+        #j_6:checked ~ #world #block {
+            animation-name: b_2;
+        }
+
+        [id^="j_d"]:checked ~ #world #block {
+            animation-name: bd;
+        }
+
+        [id^="j1_"]:checked ~ #world #block {
+            animation-name: b1;
+        }
+
+        [id^="j2_"]:checked ~ #world #block {
+            animation-name: b2;
+        }
+
+        [id$="_1"]:checked ~ #world #gameover,
+        [id$="_3"]:checked ~ #world #gameover,
+        [id$="_5"]:checked ~ #world #gameover {
+            animation-name: go1;
+        }
+
+        [id$="_0"]:checked ~ #world #gameover,
+        [id$="_2"]:checked ~ #world #gameover,
+        [id$="_4"]:checked ~ #world #gameover,
+        [id$="_6"]:checked ~ #world #gameover {
+            animation-name: go2;
+        }
+
+        [id^="j_d"]:checked ~ #world #gameover {
+            animation-name: god;
+            animation-delay: 0.95s;
+        }
+
+        @keyframes delayleft {
+            0% {
+                --delayleft: 0;
+            }
+
+            100% {
+                --delayleft: -100vmin;
+                left: 0;
+            }
+        }
+
+        #browsercheck {
+            position: absolute;
+            width: 100%;
+            height: 50vmin;
+            left: 100vmin;
+            top: 25vmin;
+            z-index: 2;
+            text-align: center;
+            animation: delayleft 1s steps(1) forwards;
+            pointer-events: none;
+        }
+
+            #browsercheck .choice {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: var(--delayleft);
+                pointer-events: initial;
+            }
+
+            #browsercheck p {
+                margin: 0 0 2vmin;
+                padding: 0;
+                font-size: 2vmin;
+            }
+
+            #browsercheck a:link,
+            #browsercheck a:visited,
+            #browsercheck a:hover,
+            #browsercheck a:active,
+            #browsercheck label {
+                display: block;
+                width: 60vmin;
+                height: 8vmin;
+                margin: 0 auto 2vmin;
+                background: #535353;
+                color: white;
+                font-size: 2vmin;
+                line-height: 8vmin;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        #trybrowser:checked ~ form #browsercheck {
+            display: none;
+        }
+
+        #link {
+            position: absolute;
+            left: 2vmin;
+            top: 2vmin;
+            font-size: 2vmin;
+            color: #535353;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="trybrowser" autocomplete="off" />
+    <input type="radio" name="hiscore" id="h1" checked="checked" />
+    <input type="radio" name="hiscore" id="h2" />
+    <form autocomplete="off">
+        <input type="reset" id="reset" />
+        <input type="radio" name="jump" id="j_d0" /><input type="radio" name="jump" id="j_d1" /><input type="radio" name="jump" id="j_d2" /><input type="radio" name="jump" id="j_d3" /><input type="radio" name="jump" id="j_d4" /><input type="radio" name="jump" id="j_d5" /><input type="radio" name="jump" id="j_d6" />
+        <input type="radio" name="jump" id="j_0" /><input type="radio" name="jump" id="j_1" /><input type="radio" name="jump" id="j_2" /><input type="radio" name="jump" id="j_3" /><input type="radio" name="jump" id="j_4" /><input type="radio" name="jump" id="j_5" /><input type="radio" name="jump" id="j_6" />
+        <input type="radio" name="jump" id="j1_0" /><input type="radio" name="jump" id="j2_0" />
+        <input type="radio" name="jump" id="j1_1" /><input type="radio" name="jump" id="j2_1" />
+        <input type="radio" name="jump" id="j1_2" /><input type="radio" name="jump" id="j2_2" />
+        <input type="radio" name="jump" id="j1_3" /><input type="radio" name="jump" id="j2_3" />
+        <input type="radio" name="jump" id="j1_4" /><input type="radio" name="jump" id="j2_4" />
+        <input type="radio" name="jump" id="j1_5" /><input type="radio" name="jump" id="j2_5" />
+        <input type="radio" name="jump" id="j1_6" /><input type="radio" name="jump" id="j2_6" />
+        <div id="world">
+            <div id="dayNight">
+                <div id="bg"></div>
+                <div id="clouds"></div>
+                <p id="hi">Hi</p>
+                <div id="score" class="score">
+                    <ul class="thousands"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="hundreds"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="tens"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="ones"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                </div>
+                <div id="hiscore1" class="score">
+                    <ul class="thousands"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="hundreds"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="tens"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="ones"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                </div>
+                <div id="hiscore2" class="score">
+                    <ul class="thousands"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="hundreds"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="tens"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                    <ul class="ones"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                </div>
+                <div id="dino"><div class="body"><div class="feet"></div></div><div class="die"></div></div>
+                <div class="ob" id="ob1"><div></div></div>
+                <div class="ob" id="ob2"><div></div></div>
+                <div class="ob" id="ob3"><div></div></div>
+                <label for="j_d0"></label><label for="j_d1"></label><label for="j_d2"></label><label for="j_d3"></label><label for="j_d4"></label><label for="j_d5"></label><label for="j_d6"></label>
+                <label for="j_0"></label><label for="j_1"></label><label for="j_2"></label><label for="j_3"></label><label for="j_4"></label><label for="j_5"></label><label for="j_6"></label>
+                <label for="j1_0"></label><label for="j2_0"></label>
+                <label for="j1_1"></label><label for="j2_1"></label>
+                <label for="j1_2"></label><label for="j2_2"></label>
+                <label for="j1_3"></label><label for="j2_3"></label>
+                <label for="j1_4"></label><label for="j2_4"></label>
+                <label for="j1_5"></label><label for="j2_5"></label>
+                <label for="j1_6"></label><label for="j2_6"></label>
+                <div id="block"></div>
+                <div id="gameover">
+                    <p>Game Over</p>
+                    <div id="reset1"><label for="reset"></label><label for="h2">New Hiscore!</label></div>
+                    <div id="reset2"><label for="reset"></label><label for="h1">New Hiscore!</label></div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button id="btn" style="position:fixed; bottom: 10px; left: 5px;">Check</button>
+    <h1 style="position:fixed; bottom: 10px; left: 35%;">No Internet</h1>
+    <script>
+        function showToast(msg) {
+            MyJavascriptInterface.showToast(msg);
+        }
+        document.getElementById("btn").addEventListener("click", () => {
+            showToast('Lord Jesus my Protector');
+        });
+    </script>
+</body>
+</html>
