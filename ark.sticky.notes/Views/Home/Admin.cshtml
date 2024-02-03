@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="/css/site.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Translation Analysis Check List</h1>
+    <div class="container">
+        <div class="tab_container">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1"><i class="fa fa-code"></i><span>Back Translation</span></label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2"><i class="fa fa-pencil-square-o"></i><span>Specific Difficult Passage to Check</span></label>
+
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3"><i class="fa fa-bar-chart-o"></i><span>Specific Checks of Theological and important words</span></label>
+
+                <input id="tab4" type="radio" name="tabs">
+                <label for="tab4"><i class="fa fa-folder-open-o"></i><span>Textual Analysis of the New Testament using the Textus Key</span></label>
+
+                <input id="tab5" type="radio" name="tabs">
+                <label for="tab5"><i class="fa fa-envelope-o"></i><span>Contact</span></label>
+            <section id="content1" class="tab-content">
+                <h3>Passages for Back Translation</h3>
+                @foreach (var v in @ViewBag.data)
+                {
+                    <p>
+                        <div class="verse-title">
+                            <h3 style="display:inline-block;">@v.title</h3>
+                            <div style="display:inline-block; float:right;">
+                                <a href="#popup">
+                                    <img src="/img/camera_1.jpg" width="50" style="padding-top: 20px; padding-right: 10px;" />
+                                </a>
+                            </div>
+                        </div>
+                        <hr />
+                    </p>
+                }
+            </section>
+
+            <section id="content2" class="tab-content">
+                <h3>Headline 2</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </section>
+
+            <section id="content3" class="tab-content">
+                <h3>Headline 3</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </section>
+
+            <section id="content4" class="tab-content">
+                <h3>Headline 4</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.
+                </p>
+            </section>
+
+            <section id="content5" class="tab-content">
+                <h3>Headline 5</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </section>
+        </div>
+
+        <p class="no_wrap">
+            <span>based on Trinitarian Bible Society <a target="_blank" href="Translation Analysis Checklist, issue 1.2, December 2016.pdf">reference document</a></span>
+        </p>
+
+
+        <div class="popup" id="popup">
+            <div class="popup-inner">
+                <div class="popup__text">
+                    <h1>Lorem ipsum dolor sit amet</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ex velit, viverra non vulputate vitae, blandit vitae nisl. Nullam fermentum orci et erat viverra bibendum. Aliquam sed varius nibh, vitae mattis purus. Mauris elementum sapien non ullamcorper vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eget felis sit amet eros viverra pulvinar.</p>
+                </div>
+                <a class="popup__close" href="#">X</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>

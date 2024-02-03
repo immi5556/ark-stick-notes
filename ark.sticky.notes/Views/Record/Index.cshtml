@@ -1,0 +1,654 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sticky Notes - Recording Event</title>
+    <meta name="description" content="Sticky Notes Recording Data">
+    <meta name="author" content="Immanuel Developer">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+    <link href="~/css/record_v1.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="https://immanuel.co/favicon.ico" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ark-js-util@latest/ark-util.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <script type="text/javascript" src="/lib/mic-recorder-to-mp3.js"></script>
+    <script src="~/js/speech.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo" id="hmbrg">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </div>
+        <div class="logo" id="title">
+            <h2 style="font-family:Gloria Hallelujah, cursive;">My Sticky Notes</h2>
+        </div>
+        <div class="buttons">
+            <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
+            <a id="sign_out" style="text-decoration: none;color: black;" href="javascript:void(0);"><i class="fa-solid fa-sign-out fa-2xl"></i></a>
+        </div>
+        <div class="search">
+            <input id="srch-txt" type="search" placeholder=" Atleast type 3 chars and hit enter or search icon">
+            <i class="fa-solid fa-close fa-2xl"></i>
+        </div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu menu--is-closed">
+            <li><a class="item item-0 menu-toggle"><i class="fa fa-times"></i></a></li>
+            <li>
+                <a id="add_new" class="item item-1">
+                    <i class="fa fa-plus"></i> <br />
+                    <label>add note</label>
+                </a>
+            </li>
+            <li>
+                <a href="/api/v1/sticky/download" download class="item item-2">
+                    <i class="fa fa-download"></i> <br />
+                    <label>download</label>
+                </a>
+            </li>
+            <li><a class="item item-3"><i style="display:none;" class="fa fa-cloud"></i></a></li>
+            <li><a class="item item-4"><i style="display:none;" class="fa fa-coffee"></i></a></li>
+            <li><a class="item item-5"><i style="display:none;" class="fa fa-dribbble"></i></a></li>
+            <li><a class="item item-6"><i style="display:none;" class="fa fa-book"></i></a></li>
+            <li><a class="item item-7"><i style="display:none;" class="fa fa-book"></i></a></li>
+        </ul>
+    </div>
+    <div class="speech-modal">
+        <div class="speech-modal-backdrop">
+            <div class="speechtotext-modal-content">
+                <img src="/img/listening_1.gif" width="150" /> <br />
+                <div class="dropdown">
+                    <select class="dropdown-select">
+                        <option selected value="en-US">English</option>
+                        <option value="ta-IN">Tamil</option>
+                    </select>
+                </div>
+                <hr />
+                <p>
+                    <textarea class="paper"></textarea>
+                </p>
+                <label id="accept" class="button">Accept</label>
+                <label id="clear" class="clear button button-blue">Clear</label>
+                <label id="reject" class="button button-red" for="modal-toggle">Reject</label>
+
+                <div id="spch-stt">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: absolute; left: 90px; top: -10px;display: none;"><h1>My Sticky Notes</h1></div>
+    <div id="board" class="board-fix">
+    </div>
+    <div class="old-boards board-old-fix" style="margin-left:50px;">
+        @foreach (var v1 in (Dictionary<string, List<Record>>)ViewBag.time_records)
+        {
+            <div class="date-contain">
+                <h2>@v1.Key</h2>
+                @foreach (Record v in v1.Value)
+                {
+                    string copy_url = @ViewBag.base_url + @ark.bible.analysis.Controllers.RecordController.RandomString(4) + @v.record_id + @ark.bible.analysis.Controllers.RecordController.RandomString(3) + "^" + @ViewBag.user_email;
+                    string clr = string.IsNullOrEmpty(@v.color) ? "#FFFD75" : @v.color;
+                    <div class="note" style="background-color:@clr">
+                        <div class="share-social" style="margin-bottom:15px;display:none;position:absolute;top:-110px;">
+                            <a href="javascript:openWhatsApp('@copy_url')" class="fa fa-2x fa-whatsapp"></a>
+                            <a href="#" class="fa fa-2x fa-facebook"></a>
+                            <a href="#" class="fa fa-2x fa-twitter"></a>
+                            <a href="#" class="fa fa-2x fa-skype"></a>
+                            <div class="copy-link">
+                                <input type="text" class="copy-link-input" value="@copy_url" readonly>
+                                <button type="button" class="copy-link-button">
+                                    <span class="material-icons">copy</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div style="position:relative;min-width:290px;">
+                            <a href="javascript:;" class="save-me" style="">
+                                <img src="/img/save-img.png" width="30">
+                            </a>
+                            <div style="padding-left:2px;transform: translateY(-10px);display: inline-block;" class="u-at">@v.at</div>
+                            <a href="javascript:;" style="padding-left:5px;" class="share-me">
+                                <img src="/img/share.png" width="30">
+                            </a>
+                            <div style="display:inline-block;padding-left:5px;transform: translateY(-10px)">
+                                <a href="javascript:;" class="button remove">X</a>
+                            </div>
+                        </div>
+                        <div class="note_cnt">
+                            <div data-linkify contenteditable="true" style="max-height:80px;min-height:80px;overflow-y:auto;" class="textarea title" data-text="Enter note title">@Html.Raw(@v.key)</div>
+                            <div data-linkify contenteditable="true" style="max-height:200px;overflow-y:auto;" class="textarea cnt" data-text="Enter note description here">@Html.Raw(@v.value)</div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <a href="javascript:void(0);"><img src="/img/audio_record.png" alt="record audio as mp3" class="recording" style="padding: 15px;" width="60"></a>
+                            <a href="javascript:void(0);" style="padding: 0px;position: absolute;margin-top: 10px;height: 35px;text-decoration: none;text-align:center;">
+                                <span>color</span> <br />
+                                <input class="color-pick" type="color" value="@clr" />
+                            </a>
+                            <a class="speechtotext" href="javascript:void(0);"><img src="/img/speech_text.png" alt="speech to text" class="" style="position:absolute; right: 15px;padding: 15px;" width="70"></a>
+                        </div>
+                        <div style="display:none;">
+                            <span class="recrd_id">@v.record_id</span>
+                            <span class="recrd_at">@v.at</span>
+                            <span class="recrd_ip">@v.ip</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="timer" style="text-align:center;display:none;">
+        <img src="/img/listening_1.gif" width="150" /> <br />
+        <div class="circle-timer">
+            <div class="timer-slot">
+                <div class="timer-lt"> </div>
+            </div>
+            <div class="timer-slot">
+                <div class="timer-rt"></div>
+            </div>
+            <div class="count"></div>
+        </div>
+        <br />
+        <label id="cancel-recording" class="button button-red" for="modal-toggle">Cancel</label>
+    </div>
+    <script>
+        (function ($) {
+            /**
+             * Auto-growing textareas; technique ripped from Facebook
+             * https://codepen.io/edmondko/pen/AJEaNV (by Edmond Co)
+             * https://github.com/jaz303/jquery-grab-bag/tree/master/javascripts/jquery.autogrow-textarea.js
+             */
+            $.fn.autogrow = function (options) {
+                return this.filter('.textarea').each(function () {
+                    var self = this;
+                    var $self = $(self);
+                    var minHeight = $self.height();
+                    var noFlickerPad = $self.hasClass('autogrow-short') ? 0 : parseInt($self.css('lineHeight')) || 0;
+
+                    var shadow = $('<div></div>').css({
+                        position: 'absolute',
+                        top: -10000,
+                        left: -10000,
+                        width: $self.width(),
+                        fontSize: $self.css('fontSize'),
+                        fontFamily: $self.css('fontFamily'),
+                        fontWeight: $self.css('fontWeight'),
+                        lineHeight: $self.css('lineHeight'),
+                        resize: 'none',
+                        'word-wrap': 'break-word'
+                    }).appendTo(document.body);
+
+                    var update = function (event) {
+                        var times = function (string, number) {
+                            for (var i = 0, r = ''; i < number; i++) r += string;
+                            return r;
+                        };
+
+                        var val = self.value.replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/&/g, '&amp;')
+                            .replace(/\n$/, '<br/>&nbsp;')
+                            .replace(/\n/g, '<br/>')
+                            .replace(/ {2,}/g, function (space) { return times('&nbsp;', space.length - 1) + ' ' });
+
+                        // Did enter get pressed?  Resize in this keydown event so that the flicker doesn't occur.
+                        if (event && event.data && event.data.event === 'keydown' && event.keyCode === 13) {
+                            val += '<br />';
+                        }
+
+                        shadow.css('width', $self.width());
+                        shadow.html(val + (noFlickerPad === 0 ? '...' : '')); // Append '...' to resize pre-emptively.
+                        $self.height(Math.max(shadow.height() + noFlickerPad, minHeight));
+                    }
+
+                    $self.change(update).keyup(update).keydown({ event: 'keydown' }, update);
+                    $(window).resize(update);
+
+                    update();
+                });
+            };
+
+            $.get("https://api.ipify.org/?format=json", function (response) {
+                //alert(response.ip);
+                window.my_ip = response.ip;
+            }, "json")
+                .done(function () {
+                    console.log("second success");
+                })
+                .fail(function () {
+                    console.log("error");
+                    window.my_ip = '10.10.10.11';
+                })
+                .always(function () {
+                    console.log("finished");
+                });
+
+        })(jQuery);
+
+
+        var noteTemp = `<div class="note">
+                            <div class="share-social" style="margin-bottom:15px;display:none;position:absolute;top:-110px;">
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-skype"></a>
+                                <a href="#" class="fa fa-pinterest"></a>
+                                <div class="copy-link">
+                                    <input type="text" class="copy-link-input" value="" readonly>
+                                    <button type="button" class="copy-link-button">
+                                        <span class="material-icons">copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="position:relative;min-width:290px;">
+                                <a href="javascript:;" class="save-me" style="">
+                                    <img src="/img/save-img.png" width="30">
+                                </a>
+                                <div style="width:200px;padding-left:5px;transform: translateY(-10px);display: inline-block;" class="u-at"></div>
+                                <a href="javascript:;" style="padding-left:10px;display:none;" class="share-me">
+                                    <img src="/img/share.png" width="30">
+                                </a>
+                                <div style="display:inline-block;padding-left:5px;transform: translateY(-10px)">
+                                    <a href="javascript:;" class="button remove">X</a>
+                                </div>
+                            </div>
+                            <div class="note_cnt">
+                                <div data-linkify contenteditable="true" style="max-height:80px;min-height:80px;overflow-y:auto;" class="textarea title" data-text="Enter note title"></div>
+                                <div data-linkify contenteditable="true" style="max-height:200px;overflow-y:auto;" class="textarea cnt" data-text="Enter note description here"></div>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <a href="javascript:void(0);"><img src="/img/audio_record.png" alt="record audio as mp3" class="recording" style="padding: 15px;" width="60"></a>
+                                <a href="javascript:void(0);" style="padding: 0px;position: absolute;margin-top: 10px;height: 35px;text-decoration: none;text-align:center;">
+                                    <span>color</span> <br />
+                                    <input class="color-pick" type="color" value="#FFFD75" />
+                                </a>
+                                <a class="speechtotext" href="javascript:void(0);"><img src="/img/speech_text.png" alt="speech to text" class="" style="position:absolute; right: 15px;padding: 15px;" width="70"></a>
+                            </div>
+                            <div style="display:none;">
+                                <span class="recrd_id">-1</span>
+                                <span class="recrd_at"></span>
+                                <span class="recrd_ip">${window.my_ip}</span>
+                            </div>
+                        </div>`;
+
+        var noteZindex = 1;
+        function deleteNote() {
+            $(this).parent('.note').hide("puff", { percent: 133 }, 250);
+        };
+
+        function newNote() {
+            var nnote = $(noteTemp);
+            nnote.hide().appendTo("#board").show("fade", 300);
+            //.draggable().on('dragstart',
+            //    function () {
+            //        $(this).zIndex(++noteZindex);
+            //    });
+            nnote.find('.remove').click(deleteNote);
+            nnote.find('textarea').autogrow();
+
+            nnote.find(".save-me").click(function () {
+                saveMe($(this).closest('.note'));
+            });
+            return false;
+        };
+
+        //$(document).on('click', '.remove', deleteNote);
+        //$(document).on('click', '.save-me', function () {
+        //    saveMe($(this).closest('.note'));
+        //});
+
+        function saveMe(domNote) {
+            $(domNote).find("*[data-linkify]").each((i, t) => {
+                console.log(t);
+                linkifyEle(t);
+            });
+            fetch('/api/v1/sticky/upsert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    record_id: $(domNote).find(".recrd_id").text(),
+                    title: $(domNote).find(".title").html(),
+                    key: $(domNote).find(".title").html(),
+                    value: $(domNote).find(".cnt").html(),
+                    ip: window.my_ip,
+                    color: $(domNote).find(".color-pick").val()
+                })
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                return response.json();
+            })
+                .then((resp) => {
+                    $(domNote).find(".recrd_id").text(resp.record_id)
+                    $(domNote).find(".u-at").each((i, t) => {
+                        console.log(resp.at);
+                        t.innerText = toLocalTime(new Date(resp.at));
+                    });
+                });
+        }
+
+        $(document).ready(function () {
+
+            $("#board").height("500px");
+
+            $("#add_new").click(newNote);
+
+            $('.remove').click(deleteNote);
+
+            $(".save-me").click(function () {
+                saveMe($(this).closest('.note'));
+            });
+
+            newNote();
+
+            $(".u-at").each((i, t) => {
+                t.innerText = t.innerText && toLocalTime(new Date(t.innerText));
+            });
+
+
+            $(document).on("click", ".share-me", function () {
+                let stt = false;
+                if ($(this).closest(".note").find(".share-social").is(":visible")) {
+                    stt = true;
+                }
+                $(".share-social").hide();
+                if (!stt)
+                    $(this).closest(".note").find(".share-social").show();
+            })
+            $(document).on("click", "[contenteditable=true]", function () {
+                console.log('content-editable clicked.')
+                $(this).focus();
+            })
+            initcopyurl();
+            return false;
+        });
+
+        var initcopyurl = () => {
+            document.querySelectorAll(".copy-link").forEach((copyLinkParent) => {
+                const inputField = copyLinkParent.querySelector(".copy-link-input");
+                const copyButton = copyLinkParent.querySelector(".copy-link-button");
+                const text = inputField.value;
+
+                inputField.addEventListener("focus", () => inputField.select());
+
+                copyButton.addEventListener("click", () => {
+                    inputField.select();
+                    navigator.clipboard.writeText(text);
+
+                    inputField.value = "Copied!";
+                    setTimeout(() => (inputField.value = text), 2000);
+                });
+            });
+
+        }
+
+        function convertLocalDateToUTCIgnoringTimezone(date) {
+            const timestamp = Date.UTC(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds(),
+            );
+
+            return new Date(timestamp);
+        }
+
+        function convertUTCToLocalDateIgnoringTimezone(utcDate) {
+            return new Date(
+                utcDate.getUTCFullYear(),
+                utcDate.getUTCMonth(),
+                utcDate.getUTCDate(),
+                utcDate.getUTCHours(),
+                utcDate.getUTCMinutes(),
+                utcDate.getUTCSeconds(),
+                utcDate.getUTCMilliseconds(),
+            );
+        }
+        var toLocalTime = (utc) => {
+            var rz = convertLocalDateToUTCIgnoringTimezone(utc);
+            return rz.toLocaleString();
+        }
+        var linkifyAll = () => $('*[data-linkify]').each((i, e) => linkifyEle(e));
+        var linkify = (ele) => {
+            console.log($(ele).text());
+            if ($(ele).text())
+                $(ele).html($(ele).text().replace(/(?:(https?\:\/\/[^\s]+))/m, '<a class="exc-linkify" target="_blank" contenteditable="false" href="$1">$1</a>'));
+        }
+        var linkifyEle = (elem) => {
+            $(elem).find("*").each((i, t) => {
+                console.log(t.tagName);
+                if (t.tagName === 'A' && !$(t).hasClass('inc-linkify')) {
+                    $(t).remove();
+                } else
+                    linkify(t);
+            });
+        }
+        var base_url = '@(ViewBag.base_url)';
+    </script>
+    <script>
+
+        $("#sign_out").on("click", () => {
+            ark_util.cookie.delete('sticky_email');
+            window.location = '/Record';
+        });
+
+        $(document).on("click", ".note", (evt) => {
+            $(".note").removeClass('note-selected');
+            $(evt.target).closest(".note").addClass('note-selected');
+        });
+
+        $("#dld_notes").on("click", () => {
+
+        });
+
+        function openWhatsApp(url) {
+            if (!url) return;
+            url = encodeURIComponent(url);
+            if (ismobile()) {
+                //window.open('https://web.whatsapp.com://send?text=https://www.youtube.com/watch?v=ohpCMpderow');
+                window.open(`whatsapp://send?text=${url}`);
+            } else {
+                //window.open('whatsapp://send?text=https://www.youtube.com/watch?v=ohpCMpderow');
+                window.open(`https://web.whatsapp.com:/send?text=${url}`);
+            }
+        }
+        function ismobile() {
+            if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/Blackberry/i) || navigator.userAgent.match(/WebOs/i)) { // detect mobile browser
+                return true;
+            }
+            return false;
+        }
+
+        var initialCount = 15,
+            count = initialCount,
+            intr = null;
+
+        const recorder = new MicRecorder({
+            bitRate: 128
+        });
+
+        var timer_ = () => {
+
+            function timer() {
+                if (count <= 0) {
+                    if (count == 0) {
+                        end();
+                        stopRecording();
+                    } else if (count == -1) {
+                        count = initialCount;
+                        var el = $(".circle-timer");
+                        el.before(el.clone(true)).remove();
+                    }
+                }
+                count = count - 1;
+                $(".timer .count").text(count);
+            }
+
+            var show = () => $(".timer").show();
+            var hide = () => $(".timer").hide();
+            var reset = () => {
+                count = -1;
+                timer();
+            }
+            var start = () => {
+                reset();
+                show();
+                if (intr) clearInterval(intr);
+                intr = setInterval(timer, 1000);
+            }
+            var end = () => {
+                if (intr) clearInterval(intr);
+                hide();
+            }
+            function stopRecording() {
+                // create the mp3
+                recorder.stop().getMp3().then(([buffer, blob]) => {
+                    console.log(buffer, blob);
+                    // create the file
+                    const file = new File(buffer, 'audio.mp3', {
+                        type: blob.type,
+                        lastModified: Date.now()
+                    });
+
+                    var fd = new FormData();
+                    fd.append('file', file);
+
+                    $.ajax({
+                        url: '/api/v1/sticky/audio/upload',
+                        type: 'post',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        success: function (resp) {
+
+                            // display the as an Audio object
+                            const li = document.createElement('li');
+                            li.setAttribute('contenteditable', true);
+                            //const player = new Audio(URL.createObjectURL(file));
+                            const player = new Audio(resp.url);
+                            player.controls = true;
+                            li.appendChild(player);
+                            $(li).append('<a href="javascript:void(0);" class="delete-aud inc-linkify" style="cursor:pointer;"><img src="/img/delete-48.png" width="30" style="padding-left:10px;padding-bottom:10px;"></a>');
+                            $('.note-selected').find('.textarea.cnt').append(li);
+                        },
+                    });
+
+                }).catch((e) => {
+                    console.error('mp3 err', e);
+                });
+            }
+
+            return {
+                start: start,
+                end: end
+            }
+            //$(".circle-timer").click(function () {
+            //    $(this).toggleClass('paused');
+            //    if ($(this).hasClass('paused')) {
+            //        timerPause = true;
+            //    } else {
+            //        timerPause = false;
+            //    }
+            //});
+        };
+        //timer_();
+        $(() => {
+            $(document).on("click", ".recording", (evt) => {
+                //$(evt.target).toggleClass("recording-progress");
+                timer_().start();
+                startRecording();
+            });
+
+            $("#cancel-recording").on("click", () => {
+                timer_().end();
+            })
+
+            $(document).on("click", ".delete-aud", (evt) => {
+                $(evt.target).closest("li").remove();
+            });
+
+            function startRecording() {
+                //recorder onject from .....mp3.js
+                recorder.start().then(() => {
+
+                }).catch((e) => {
+                    console.error('mp3 err', e);
+                });
+            }
+        });
+    </script>
+    <script>
+        $(function () {
+
+            const $ = document.querySelector.bind(document);
+
+            const header = $(".header");
+            const searchButton = $("i.fa-magnifying-glass");
+            const closeSearchButton = $("i.fa-close");
+
+            searchButton.addEventListener("click", (_) => {
+                header.classList.add("searching");
+            });
+
+            closeSearchButton.addEventListener("click", (_) => {
+                header.classList.remove("searching");
+            });
+        });
+    </script>
+    <script>
+        $('body').on('click', () => {
+            $('.menu').removeClass('menu--is-closed');
+            $('.menu').addClass('menu--is-closed');
+        });
+        $('.menu-toggle, #hmbrg').on('click', function (evt) {
+            evt.stopPropagation();
+            console.log('click'); $('.menu').toggleClass('menu--is-closed');
+
+        });
+    </script>
+    <script>
+        var src_txt = '', prev_srch = '';
+        $("#srch-txt").on("search", (evt) => {
+            src_txt = ($(evt.target).val() || '').toLowerCase();
+            console.log('search fired', src_txt);
+            if (src_txt.length > 2) {
+                console.log('to be searched', src_txt);
+                prev_srch = src_txt;
+                $(".note").each((i, t) => {
+                    //console.log(t.innerText);
+                    if (t.innerText.toLowerCase().indexOf(src_txt) > -1) {
+                        $(t).removeClass('note-hide');
+                    } else {
+                        $(t).removeClass('note-hide');
+                        $(t).addClass('note-hide');
+                    }
+                });
+
+            } else {
+                console.log('srch len no enough', src_txt);
+                if (prev_srch) {
+                    prev_srch = '';
+                    $(".note").removeClass('note-hide');
+                }
+            }
+        });
+
+        $(document).on('change', '.color-pick', function(ev) {
+            console.log(ev.target.value);
+            $(this).closest('.note').css('background-color', ev.target.value);
+        });
+    </script>
+</body>
+</html>

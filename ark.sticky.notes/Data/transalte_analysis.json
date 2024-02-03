@@ -1,0 +1,47 @@
+{
+  "manuscript": {
+    "source": [
+      {
+        "key": "ot",
+        "val": "masaractic"
+      },
+      {
+        "key": "nt",
+        "val": "textus_receiptus"
+      }
+    ],
+    "sets": [
+      {
+        "set": "begotten son",
+        "meaning": [
+          "meaning_1",
+          "meaning_2",
+          "meaning_3"
+        ]
+      }
+    ],
+    "words": [
+      {
+        "word": "begotten",
+        "meaning": [
+          "meaning_1",
+          "meaning_2",
+          "meaning_3"
+        ]
+      }
+    ],
+    "reference": {
+      "key": "john_3_16",
+      "words": [
+        {
+          "word": "begotten (greek word)",
+          "set": [ "only begotten son" ]
+        }
+      ],
+      "result": [
+        "missing",
+        "changed"
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7015234F-F6E4-4466-8E02-A75DEC811A7E}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		key_points.txt = key_points.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ark.sticky.notes", "ark.sticky.notes\ark.sticky.notes.csproj", "{A6860223-8681-4812-B3A4-B1B64BD4083F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6860223-8681-4812-B3A4-B1B64BD4083F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6860223-8681-4812-B3A4-B1B64BD4083F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6860223-8681-4812-B3A4-B1B64BD4083F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6860223-8681-4812-B3A4-B1B64BD4083F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D9E7A61-F6F6-4AC9-BABC-F87EC234E07F}
+	EndGlobalSection
+EndGlobal

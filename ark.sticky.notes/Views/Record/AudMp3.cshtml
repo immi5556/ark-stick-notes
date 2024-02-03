@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+@*inspired by
+https://rainstormtech.com/using-the-mic-to-record-audio-on-a-browser*@
+<html>
+<head>
+    <title>audio recorder test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="/lib/mic-recorder-to-mp3.js"></script>
+    <link rel="shortcut icon" type="image/png" href="https://immanuel.co/favicon.ico" />
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Mic Recorder to Mp3 Example</h1>
+        <p>Check your web developer tool console for output.</p>
+
+        <hr />
+
+        <button class="btn btn-primary">Start recording</button>
+
+        <br />
+        <br />
+        <br />
+
+        <ul id="playlist"></ul>
+    </div>
+
+    <script>
+        const button = document.querySelector('button');
+
+        // set the options of this 3rd party mp3 js encoder
+        const recorder = new MicRecorder({
+            bitRate: 128
+        });
+
+        // start recording with a click of the button
+        button.addEventListener('click', startRecording);
+
+        // start the recording
+        function startRecording() {
+            recorder.start().then(() => {
+                button.textContent = 'Stop recording';
+                button.classList.toggle('btn-danger');
+                button.removeEventListener('click', startRecording);
+                button.addEventListener('click', stopRecording);
+            }).catch((e) => {
+                console.error(e);
+            });
+        }
+
+        // stop the recording
+        function stopRecording() {
+            // create the mp3
+            recorder.stop().getMp3().then(([buffer, blob]) => {
+                console.log(buffer, blob);
+                // create the file
+                const file = new File(buffer, 'audio.mp3', {
+                    type: blob.type,
+                    lastModified: Date.now()
+                });
+
+                // display the as an Audio object
+                const li = document.createElement('li');
+                const player = new Audio(URL.createObjectURL(file));
+                player.controls = true;
+                li.appendChild(player);
+                document.querySelector('#playlist').appendChild(li);
+
+                // reset
+                button.textContent = 'Start recording';
+                button.classList.toggle('btn-danger');
+                button.removeEventListener('click', stopRecording);
+                button.addEventListener('click', startRecording);
+            }).catch((e) => {
+                console.error(e);
+            });
+        }
+    </script>
+</body>
+</html>

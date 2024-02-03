@@ -1,0 +1,9 @@
+//this file is used to store transaltion enter by users and if its valid, then move to translations.json
+{
+  "translations": [
+    {
+      "ln": "en",
+      "id": "King James Version"
+    }
+  ]
+}

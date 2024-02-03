@@ -1,0 +1,374 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <link href="~/css/landing.css" rel="stylesheet" />
+    <title>Sticky Notes : Lord Jesus' Great Works</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ark-js-util@latest/ark-util.js"></script>
+    <link rel="shortcut icon" type="image/png" href="https://immanuel.co/favicon.ico" />
+    <script src="~/js/intltelinput.js"></script>
+    <link href="~/css/intltelinput.css" rel="stylesheet" />
+    <link href="~/css/intlteldemo.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="iphone">
+        <main class="main">
+            <section class="login">
+                <div class="card card--shadow">
+                    <div class="card__header">
+                        <h4 class="my subtitle text-danger text-center">Your Email</h4>
+                    </div>
+                    <div class="card__body">
+                        <div class="info-content">
+                            <img src="/img/sticky_mob.png" class="my img-fluid" alt="">
+                            <h4 class="text-success text-small">
+                                <input type="text" placeholder="email" id="phone" />
+                            </h4>
+                            <div class="my text-center card--footer">
+                                <a href="javascript:;" id="send-otp" class="button d-flex text-success">SEND OTP</a>
+                            </div>
+                        </div>
+                        <div class="title text-center my">
+                            <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="true" autocomplete="off">
+                                <input type="number" min="0" max="9" id="digit-1" name="digit-1" class="digit-otp" data-next="digit-2" />
+                                <input type="number" min="0" max="9" id="digit-2" name="digit-2" class="digit-otp" data-next="digit-3" data-previous="digit-1" />
+                                <input type="number" min="0" max="9" id="digit-3" name="digit-3" class="digit-otp" data-next="digit-4" data-previous="digit-2" />
+                                <input type="number" min="0" max="9" id="digit-4" name="digit-4" class="digit-otp" data-next="digit-5" data-previous="digit-3" />
+                            </form>
+                        </div>
+                        <div style="height: 55px;">
+                            <p class="text-small text-center" id="err_msg">@ViewBag.ErrorMsg</p>
+                        </div>
+                        <div class="my text-center card--footer" style="visibility:visible;height: 50px;" id="login_contain">
+                            <a href="#" id="login-stick" class="button d-flex text-success">Log in</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="container" style="display:none;">
+        <div class="clock">
+            <div class="time-box">
+                <div class="numbers" id="hours-first">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                </div>
+            </div>
+            <div class="time-box">
+                <div class="numbers" id="hours-second">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </div>
+            </div>
+            <div class="time-box">
+                <div class="numbers" id="minutes-first">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </div>
+            </div>
+            <div class="time-box">
+                <div class="numbers" id="minutes-second">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </div>
+            </div>
+            <div class="time-box">
+                <div class="numbers" id="seconds-first">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </div>
+            </div>
+            <div class="time-box">
+                <div class="numbers" id="seconds-second">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const h1 = document.getElementById("hours-first");
+        const h2 = document.getElementById("hours-second");
+        const m1 = document.getElementById("minutes-first");
+        const m2 = document.getElementById("minutes-second");
+        const s1 = document.getElementById("seconds-first");
+        const s2 = document.getElementById("seconds-second");
+        let hour1 = 0,
+            hour2 = 0,
+            minute1 = 0,
+            minute2 = 0,
+            second1 = 0;
+
+        function handleNumber(num) {
+            if (num < 10) {
+                return [0, num];
+            } else {
+                return [Math.floor(num / 10), num % 10];
+            }
+        }
+
+        function changeTime() {
+            let time = new Date();
+            const [h_1, h_2] = handleNumber(time.getHours());
+            const [m_1, m_2] = handleNumber(time.getMinutes());
+            const [s_1, s_2] = handleNumber(time.getSeconds());
+            if (h_1 !== hour1) {
+                hour1 = h_1;
+                h1.style.transform = `translateY(-${hour1 * 30}px)`;
+            }
+            if (h_2 !== hour2) {
+                hour2 = h_2;
+                h2.style.transform = `translateY(-${hour2 * 30}px)`;
+            }
+            if (m_1 !== minute1) {
+                minute1 = m_1;
+                m1.style.transform = `translateY(-${minute1 * 30}px)`;
+            }
+            if (m_2 !== minute2) {
+                minute2 = m_2;
+                m2.style.transform = `translateY(-${minute2 * 30}px)`;
+            }
+            if (s_1 !== second1) {
+                second1 = s_1;
+                s1.style.transform = `translateY(-${second1 * 30}px)`;
+            }
+            s2.style.transform = `translateY(-${s_2 * 30}px)`;
+        }
+        setInterval(changeTime);
+
+    </script>
+    <script>
+
+        var input = document.querySelector("#phone");
+        $(input).on("paste", function (e) {
+            e.stopPropagation();
+            //e.preventDefault();
+        })
+        var iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: function (callback) {
+                $.get('https://api.ipify.org/?format=json', function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "in";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "/js/utils.js",
+        });
+        iti.promise.then(function () {
+            console.log('init...')
+        });
+        (function ($) {
+            $.fn.invisible = function () {
+                return this.each(function () {
+                    $(this).css("visibility", "hidden");
+                });
+            };
+            $.fn.visible = function () {
+                return this.each(function () {
+                    $(this).css("visibility", "visible");
+                });
+            };
+        }(jQuery));
+        function otpinit() {
+            fetch('/api/v1/sticky/otp/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: input.value,
+                    ip: window.my_ip
+                })
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            }).then((resp) => {
+                console.log(resp);
+                if (resp.error) {
+                    $("#send-otp").text("RESEND OTP");
+                    $("#err_msg").html(`OTP Sent Error:  ${resp.error}, pls retry.`);
+                } else {
+                    $("#send-otp").text("RESEND OTP");
+                    $("#err_msg").html("OTP Sent to your email, pls enter & click login.");
+                    $("#login_contain").data("sec_id", resp.secret_id);
+                    //$("#login_contain").visible();
+                }
+            }).catch((err) => {
+                $("#err_msg").html("OTP Sent Error, pls retry.");
+                console.error('sticky error', err);
+                $("#send-otp").text("RESEND OTP");
+            });
+        }
+        $(() => {
+            $.get("https://api.ipify.org/?format=json", function (response) {
+                //alert(response.ip);
+                window.my_ip = response.ip;
+            }, "json")
+                .done(function () {
+                    console.log("second success");
+                })
+                .fail(function () {
+                    console.log("error");
+                    window.my_ip = '10.10.10.10';
+                })
+                .always(function () {
+                    console.log("finished");
+                });
+        })
+        document.getElementById("send-otp").addEventListener("click", () => {
+            var email = document.getElementById("phone").value;
+            var country = $(".iti__selected-flag").attr("title");
+            resetDigit();
+            //$("#login_contain").invisible();
+            otpinit();
+            console.log(email, country);
+        })
+        function resetDigit() {
+            $("#digit-1").val("");
+            $("#digit-2").val("");
+            $("#digit-3").val("");
+            $("#digit-4").val("");
+            $("#login_contain").data("sec_id", null)
+        }
+        function getDigit() {
+            return $("#digit-1").val() + '' + $("#digit-2").val() + '' + $("#digit-3").val() + '' + $("#digit-4").val();
+        }
+    </script>
+    <script>
+        function otpverify() {
+            fetch('/api/v1/sticky/otp/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: input.value,
+                    ip: window.my_ip,
+                    secret_id: $("#login_contain").data("sec_id"),
+                    otp: getDigit()
+                })
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            }).then((resp) => {
+                console.log(resp);
+                if (resp.error) {
+                    $("#send-otp").text("RESEND OTP");
+                    $("#err_msg").html(`OTP Verify Error:  ${resp.error}, pls retry.`);
+                } else {
+                    ark_util.cookie.set('sticky_email', input.value, 90);
+                    redirect();
+                }
+            }).catch((err) => {
+                $("#err_msg").html("OTP Sent Error, pls retry.");
+                console.error('sticky error', err);
+                $("#send-otp").text("RESEND OTP");
+            });
+        }
+
+        $("#login-stick").on("click", () => {
+            otpverify();
+        });
+        const redirect = () => {
+            var mn = ark_util.cookie.get('sticky_email');
+            if (mn) {
+                window.location = '/Record';
+            } else {
+
+            }
+        }
+        redirect();
+    </script>
+    <script>
+        var $inp = $(".digit-otp");
+
+        $inp.on({
+            input: function (ev) {
+                if (this.value) {
+                    $inp.eq($inp.index(this) + 1).focus();
+                }
+            },
+            keydown: function (ev) {
+                var i = $inp.index(this);
+                console.log('otp keydown', i, ev.which, this.value)
+                if (i === 0) i = 3;
+                if (ev.which === 8 && !this.value && i) {
+                    $inp.eq(i - 1).focus();
+                }
+            },
+            change: function (ev) {
+                console.log('otp change', this.value);
+                if (this.value.length > 3) {
+                    handlePaste(this.value);
+                }
+            }
+        });
+        var handlePaste = (pastedData) => {
+            $inp.each((i, t) => $(t).val(''));
+            var pastedChars = pastedData.split("");
+
+            //var curIndex = $inp.index(this)
+            var charIndex = 0;
+            for (var i = 0; i < $inp.length; i++) {
+                //console.log('otp', i, j, charIndex);
+                for (var j = charIndex; j < pastedChars.length; j++) {
+                    var ccc = parseInt(pastedChars[j]);
+                    //console.log('otp paste', i, j, pastedChars[j], ccc, Number.isInteger(ccc));
+                    charIndex++;
+                    if (Number.isInteger(ccc)) {
+                        $inp.eq(i).val(ccc).focus();
+                        break;
+                    }
+                }
+            }
+        }
+        $(document).on("paste", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var pastedData = e.originalEvent.clipboardData.getData('text');
+            handlePaste(pastedData);
+        });
+    </script>
+</body>
+</html>

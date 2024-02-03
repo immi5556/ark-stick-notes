@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+@*inspired by
+https://rainstormtech.com/using-the-mic-to-record-audio-on-a-browser*@
+<html>
+<head>
+    <title>audio recorder test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Mic Recorder to weba Example</h1>
+        <p>Check your web developer tool console for output.</p>
+
+        <hr />
+
+        <button class="btn btn-primary">Start recording</button>
+
+        <br />
+        <br />
+        <br />
+
+        <ul id="playlist"></ul>
+    </div>
+
+    <!--
+        <a id="download">Download</a>
+        <button id="stop">Stop</button>
+        <br />
+        <audio id="player" controls></audio>
+    -->
+
+    <script>
+        const button = document.querySelector('button');
+
+        const options = { mimeType: 'audio/webm' };
+        const buffer = [];
+        var mediaRecorder = null;
+
+        // start the recording
+        const startRecording = function () {
+            mediaRecorder.start();
+            button.classList.toggle('btn-danger');
+            button.removeEventListener('click', startRecording);
+            button.addEventListener('click', stopRecording);
+        }
+
+        // stop the recording
+        const stopRecording = function () {
+            mediaRecorder.stop();
+            button.textContent = 'Start recording';
+            button.classList.toggle('btn-danger');
+            button.removeEventListener('click', stopRecording);
+            button.addEventListener('click', startRecording);
+        }
+
+        // init the audio system
+        const handleInit = function (stream) {
+            // start recording with a click of the button
+            button.addEventListener('click', startRecording);
+
+            // the mediaRecord object that captures the stream
+            mediaRecorder = new MediaRecorder(stream, options);
+
+            // catches stream of bytearray
+            mediaRecorder.addEventListener('dataavailable', function (e) {
+                if (e.data.size > 0) buffer.push(e.data);
+            });
+
+            // when stopped, create a file and allow playback
+            mediaRecorder.addEventListener('stop', function () {
+                console.dir(buffer);
+                // create a file
+                const file = new File(buffer, 'audio.webm', {
+                    type: 'audio/webm',
+                    lastModified: Date.now()
+                });
+
+                // display the file via an Audio object
+                const li = document.createElement('li');
+                const player = new Audio(URL.createObjectURL(file));
+                player.controls = true;
+                li.appendChild(player);
+                document.querySelector('#playlist').appendChild(li);
+                buffer.length = 0; // empty the buffer for the next one
+            });
+        };
+
+        // init the stream from the audio device
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+            .then(handleInit);
+
+    </script>
+</body>
+</html>

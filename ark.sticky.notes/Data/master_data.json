@@ -1,0 +1,24 @@
+{
+  "back_translsation": {
+    "key": "back_translsation",
+    "folder_path": "back_translsation",
+    "data": [
+      {
+        "title": "Genesis 3: 15-16",
+        "prefix": "genesis_3_15-16"
+      },
+      {
+        "title": "Genesis 4: 8",
+        "prefix": "genesis_4_8"
+      },
+      {
+        "title": "Psalm 2: 1-2",
+        "prefix": "psalms_2_1-2"
+      },
+      {
+        "title": "Psalm 2: 12",
+        "prefix": "psalms_2_12"
+      }
+    ]
+  }
+}

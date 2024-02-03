@@ -1,0 +1,25 @@
+﻿//this is the master data of all bible translations
+{
+  "translations": [
+    {
+      "ln": "en",
+      "id": "King James Version",
+      "display": "King James Version"
+    },
+    {
+      "ln": "en",
+      "id": "New King James Version",
+      "display": "New King James Version"
+    },
+    {
+      "ln": "ta",
+      "id": "பரிசுத்த வேதாகமம் - O.V",
+      "display": "பரிசுத்த வேதாகமம் - O.V"
+    },
+    {
+      "ln": "ta",
+      "id": "Blesing Bible",
+      "display": "Blesing Bible"
+    }
+  ]
+}

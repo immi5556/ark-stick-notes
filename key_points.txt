@@ -1,0 +1,59 @@
+﻿
+MVC: 
+	Record folder contains sticky-notes.immanuel.co
+
+
+
+BUGS:
+
+1. special character's breaking the persistence. (✓) 
+2. line break in date level history list (✓) 
+3. multiple save from board should be updated (✓) 
+4. Styles & CSS - broken (mobile css & viewport, etc)
+5. Burger Icon Menu hidden behind the sticky notes (✓) 
+6. Delete & save overlapping (✓) 
+
+TO DOs:
+
+1. Enabel delete
+2. enable search
+3. enable OTP 
+	- OTP enabled for email (✓) 
+	- OTP for mobile?? - tentative
+4. download link as csv format (✓) 
+5. share notes with others
+	- create share page (✓) 
+	- copy link for sahre (✓)
+	- enable error page in sahre (invalid id, url etc)
+	- wahtsapp & pintrest
+6. order by keeping latest on top (✓) 
+7. capture the data entry log by date
+8. signout functionality (✓) 
+9. html rendering features 
+	- a href link enablement (✓) 
+10. hash the data storage, only the users can unhash it 
+11. enable audio transcript  (✓) 
+	- supported languages https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages
+	- Add few more based on above list
+12. change the eamil in url to some unique identifier
+13. lip reading - text extraction (possible??)
+	- https://ieeexplore.ieee.org/document/9117224
+14. leave page wihtout saving warning confirmation.
+15. create a shared board across users
+	- team admin
+	- team management process
+16. Concurrent operations on the board
+17. Tags & Topics
+18. Offline support
+	- Local DB
+	- Sync frequenctly
+	- Work with out even internet
+19. Enable audio recording (✓) 
+	- provide users option to stop recording witn in 15 seconds
+20. Perf issue (future proof)
+	- lazy loading based on infiite scroll
+	- initial load for a fixed time
+	- align search accordingly - full/partial search
+21. copy paste support for 4 digit pin
+22. Define color for each notes 
+	- right now its randomized based on 3 level sequence
