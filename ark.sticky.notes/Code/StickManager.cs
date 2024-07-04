@@ -2,6 +2,7 @@
 using MimeKit;
 using MailKit.Security;
 using MailKit.Net.Smtp;
+using System.Net;
 
 namespace ark.bible.analysis
 {
@@ -50,8 +51,10 @@ namespace ark.bible.analysis
             var builder = new BodyBuilder();
             builder.HtmlBody = htmlString;
             email.Body = builder.ToMessageBody();
+
             using var smtp = new SmtpClient();
-            smtp.Connect("webmail.immanuel.co", 2525, SecureSocketOptions.Auto);
+            smtp.Connect("webmail.immanuel.co");
+            //smtp.Connect("mail.immanuel.co", 2525, SecureSocketOptions.Auto); // not wokring after mocha upgrade - so commented on 4/July/2024
             smtp.Authenticate("sticky.notes@immanuel.co", "");
             smtp.Send(email);
             smtp.Disconnect(true);
